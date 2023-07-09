@@ -1,6 +1,6 @@
 <template>
   <h2 class="text-2xl font-semibold mb-6">Sign in</h2>
-  <form>
+  <form @submit.prevent="loginSubmit">
     <div class="mb-4">
       <label class="block mb-2" for="email">Email</label>
       <input
@@ -8,6 +8,7 @@
         type="email"
         id="email"
         name="email"
+        v-model="email"
         placeholder="Enter your email"
         required
       />
@@ -20,6 +21,7 @@
         :type="showPassword ? 'text' : 'password'"
         id="password"
         name="password"
+        v-model="password"
         placeholder="Enter your password"
         required
       />
@@ -36,16 +38,6 @@
         ></i>
       </div>
     </div>
-    <div class="mb-4">
-      <input
-        type="checkbox"
-        id="rememberMe"
-        class="h-4 w-4 text-blue-500 rounded border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-      />
-      <label for="rememberMe" class="ml-2 text-sm text-gray-700"
-        >Remember me</label
-      >
-    </div>
 
     <button class="Submitbutton" type="submit">Log in</button>
   </form>
@@ -58,11 +50,29 @@
 
 <script>
 import { ref } from "vue";
+import axios from "../axios";
+import { useRouter } from "vue-router";
+
 export default {
   emits: ["showSignupForm"],
   setup() {
     let showPassword = ref(false);
-    return { showPassword };
+    let router = new useRouter();
+
+    // for login submit
+    let email = ref("");
+    let password = ref("");
+    let loginSubmit = async () => {
+      let response = await axios.post("/auth/login", {
+        email: email.value,
+        password: password.value,
+      });
+      if (response.status === 200) {
+        router.push("/habit-feed");
+      }
+    };
+
+    return { showPassword, email, password, loginSubmit };
   },
 };
 </script>
