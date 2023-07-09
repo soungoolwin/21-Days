@@ -63,11 +63,22 @@ export default {
     let email = ref("");
     let password = ref("");
     let loginSubmit = async () => {
-      let response = await axios.post("/auth/login", {
-        email: email.value,
-        password: password.value,
-      });
+      let response = await axios.post(
+        "/auth/login",
+        {
+          email: email.value,
+          password: password.value,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       if (response.status === 200) {
+        console.log(document.cookie);
+        let rp = await axios.get("/habit/getAllHabits", {
+          withCredentials: true,
+        });
+        console.log(rp);
         router.push("/habit-feed");
       }
     };
