@@ -50,7 +50,7 @@
 
 <script>
 import { ref } from "vue";
-import axios from "../axios";
+import axios from "axios";
 import { useRouter } from "vue-router";
 
 export default {
@@ -63,19 +63,13 @@ export default {
     let email = ref("");
     let password = ref("");
     let loginSubmit = async () => {
-      let response = await axios.post(
-        "/auth/login",
-        {
-          email: email.value,
-          password: password.value,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+      let response = await axios.post("/api/v1/auth/login", {
+        email: email.value,
+        password: password.value,
+      });
       if (response.status === 200) {
-        const cookieHeader = response.headers["set-cookie"];
-        console.log(cookieHeader);
+        let rp = await axios.get("/api/v1/habit/getAllHabits");
+        console.log(rp);
         router.push("/habit-feed");
       }
     };
