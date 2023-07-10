@@ -74,11 +74,8 @@ export default {
         }
       );
       if (response.status === 200) {
-        console.log(document.cookie);
-        let rp = await axios.get("/habit/getAllHabits", {
-          withCredentials: true,
-        });
-        console.log(rp);
+        const cookieHeader = response.headers["set-cookie"];
+        console.log(cookieHeader);
         router.push("/habit-feed");
       }
     };
