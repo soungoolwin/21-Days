@@ -1,10 +1,10 @@
 <template>
-  <h2 class="text-2xl font-semibold mb-6">Register</h2>
+  <h2 class="formheader">Register</h2>
   <form @submit.prevent="signupSubmit">
     <div class="mb-4">
-      <label class="block mb-2" for="email">Email</label>
+      <label class="formlabel" for="email">Email</label>
       <input
-        class="w-full px-4 py-2 border border-gray-300 rounded"
+        class="forminput"
         type="email"
         id="email"
         name="email"
@@ -14,9 +14,9 @@
       />
     </div>
     <div class="mb-4">
-      <label class="block mb-2" for="username">Username</label>
+      <label class="formlabel" for="username">Username</label>
       <input
-        class="w-full px-4 py-2 border border-gray-300 rounded"
+        class="forminput"
         type="text"
         id="username"
         name="username"
@@ -26,9 +26,9 @@
       />
     </div>
     <div class="mb-4">
-      <label class="block mb-2" for="password">Password</label>
+      <label class="formlabel" for="password">Password</label>
       <input
-        class="w-full px-4 py-2 border border-gray-300 rounded"
+        class="forminput"
         type="password"
         id="password"
         name="password"
@@ -38,9 +38,9 @@
       />
     </div>
     <div class="mb-6">
-      <label class="block mb-2" for="confirm-password">Confirm Password</label>
+      <label class="formlabel" for="confirm-password">Confirm Password</label>
       <input
-        class="w-full px-4 py-2 border border-gray-300 rounded"
+        class="forminput"
         type="password"
         id="confirm-password"
         name="confirm-password"
@@ -49,10 +49,10 @@
         required
       />
     </div>
-    <p v-if="passwordMismatch && confirmPassword" class="text-red-500 mb-5">
+    <p v-if="passwordMismatch && confirmPassword" class="formerror">
       Passwords do not match!
     </p>
-    <p v-if="error" class="text-red-500 mb-5">{{ error }}</p>
+    <p v-if="error" class="formerror">{{ error }}</p>
     <button
       class="Submitbutton"
       type="submit"

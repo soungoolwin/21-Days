@@ -60,7 +60,7 @@ export default {
 }
 
 .Logo {
-  @apply text-2xl pt-5 font-bold text-4xl pt-10;
+  @apply font-bold text-4xl pt-10;
 }
 .slogan {
   margin: 140px 0;
@@ -72,16 +72,11 @@ export default {
     @apply text-4xl;
   }
 }
-
-.form {
-  border-top-left-radius: 13%;
-  border-bottom-right-radius: 13%;
+.swapForm {
+  @apply cursor-pointer underline font-bold;
 }
 .Submitbutton {
   @apply w-full py-2 px-4  text-white font-semibold hover:bg-green-600 rounded-3xl;
   background-color: #61c9a8;
-}
-.swapForm {
-  @apply cursor-pointer underline font-bold;
 }
 </style>

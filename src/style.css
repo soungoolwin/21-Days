@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* For Login, Signup Form */
+.form {
+  border-top-left-radius: 13%;
+  border-bottom-right-radius: 13%;
+}
+
+.formheader {
+  @apply text-2xl font-semibold mb-6;
+}
+.forminput {
+  @apply w-full px-4 py-2 border border-gray-300 rounded;
+}
+
+.formlabel {
+  @apply block mb-2;
+}
+
+.formerror {
+  @apply text-red-500 mb-5;
+}
