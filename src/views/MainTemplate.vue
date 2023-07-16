@@ -35,23 +35,35 @@
           <div class="navlink">
             <ul>
               <li>
-                <router-link to="/habit-feed" exact-active-class="navactive"
+                <router-link
+                  to="/habit-feed"
+                  @click="smallScreen = false"
+                  exact-active-class="navactive"
                   ><i class="fa-solid fa-house"></i>Home</router-link
                 >
               </li>
               <li>
-                <router-link to="/profile" exact-active-class="navactive"
+                <router-link
+                  to="/profile"
+                  @click="smallScreen = false"
+                  exact-active-class="navactive"
                   ><i class="fa-solid fa-user"></i>Profile</router-link
                 >
               </li>
               <li>
-                <router-link to="/leader-board" exact-active-class="navactive"
+                <router-link
+                  to="/leader-board"
+                  @click="smallScreen = false"
+                  exact-active-class="navactive"
                   ><i class="fa-solid fa-ranking-star"></i
                   >Leaderboard</router-link
                 >
               </li>
               <li>
-                <router-link to="/create" exact-active-class="navactive"
+                <router-link
+                  to="/create"
+                  @click="smallScreen = false"
+                  exact-active-class="navactive"
                   ><i class="fa-solid fa-circle-plus"></i>Create</router-link
                 >
               </li>
@@ -61,7 +73,9 @@
             <i
               class="fa-solid fa-light fa-arrow-right-from-bracket fa-rotate-180"
             ></i>
-            <button class="text-black font-bold py-2 rounded">Logout</button>
+            <button class="text-black font-bold py-2 rounded" @click="logout()">
+              Logout
+            </button>
           </div>
         </div>
       </div>
@@ -81,18 +95,84 @@
 <script>
 import HabitFeed from "./HabitFeed";
 import { ref } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
 export default {
   components: { HabitFeed },
   setup() {
     let smallScreen = ref(false);
-    return { smallScreen };
+    let router = useRouter();
+
+    let logout = async () => {
+      let response = await axios.delete("/api/v1/auth/logout");
+      if (response.status === 200) {
+        router.push("/");
+      }
+    };
+    return { smallScreen, logout };
   },
 };
 </script>
 
 <style>
+.habitfeed-logo {
+  @apply font-bold text-3xl pt-3;
+}
+.profile {
+  @apply mx-auto text-center;
+}
+.profileimg {
+  width: 80px;
+  height: 80px;
+  @apply mx-auto mt-20 rounded-full mb-5;
+}
+.navlink {
+  @apply text-2xl mx-auto;
+  margin-top: 110px;
+  width: 85%;
+}
+
+.navlink li {
+  @apply mt-6;
+}
+
+.navlink i {
+  @apply mr-3;
+}
 .navactive {
   background-color: #61c9a8;
   @apply py-3 px-3 rounded-3xl;
+}
+.sidenav {
+  border-top-right-radius: 80px;
+  border-top: 1px solid #e2e8f0;
+  border-bottom-right-radius: 80px;
+  border-bottom: 1px solid #e2e8f0;
+  background-color: #fff;
+  padding: 1rem;
+  @apply h-screen;
+}
+.logout {
+  @apply mx-auto text-2xl md:mt-20 mt-5;
+  width: 80%;
+}
+.logout button {
+  @apply px-3;
+}
+.logout i {
+  @apply ml-2;
+}
+.content {
+  @apply mx-auto h-screen;
+  width: 70%;
+}
+
+@media (max-width: 768px) {
+  .sidenav {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    @apply h-screen;
+    height: fit-content;
+  }
 }
 </style>

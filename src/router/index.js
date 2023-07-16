@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import axios from "axios";
+import isUserLoggedIn from "@/composables/isUserLoggedIn";
 import LoginRegisterTemplate from "../views/LoginRegisterTemplate.vue";
 import HabitFeed from "../views/HabitFeed.vue";
 import MainTemplate from "../views/MainTemplate.vue";
@@ -59,4 +60,16 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
+//redirect to loginpage when non user login to login only pages
+router.beforeEach(async (to, from, next) => {
+  let isAuthenticated = await isUserLoggedIn();
+
+  if (to.path === "/habit-feed" && !isAuthenticated) {
+    next("/"); // Redirect to login page
+  } else {
+    next(); // Allow navigation to the requested route
+  }
+});
+
 export default router;

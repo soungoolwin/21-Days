@@ -18,5 +18,9 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
+  background-image: url("../public/images/BG_2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 </style>

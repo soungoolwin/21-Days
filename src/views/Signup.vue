@@ -69,7 +69,7 @@
 
 <script>
 import { ref, watch } from "vue";
-import axios from "../axios";
+import axios from "axios";
 import { useRouter } from "vue-router";
 export default {
   emits: ["showLoginForm"],
@@ -101,7 +101,7 @@ export default {
         console.log("something wrong");
         router.push("/");
       }
-      let response = await axios.post("/auth/register", {
+      let response = await axios.post("/api/v1/auth/register", {
         email: email.value,
         username: username.value,
         password: password.value,

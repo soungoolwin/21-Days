@@ -22,3 +22,12 @@
 .formerror {
   @apply text-red-500 mb-5;
 }
+/* Habit Feed */
+.contentcard {
+  @apply mt-11 rounded-3xl bg-white  shadow-lg p-8  mx-auto;
+}
+
+.joinButton {
+  @apply text-white font-semibold py-2 mt-3 px-4 rounded hover:bg-green-600;
+  background-color: #61c9a8;
+}
