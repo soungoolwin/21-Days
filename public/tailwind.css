@@ -608,8 +608,24 @@ video {
   display: none;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .w-full {
   width: 100%;
+}
+
+.w-64 {
+  width: 16rem;
+}
+
+.w-screen {
+  width: 100vw;
+}
+
+.min-w-\[16rem\] {
+  min-width: 16rem;
 }
 
 .max-w-md {
@@ -647,6 +663,10 @@ video {
 
 .justify-center {
   justify-content: center;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 .rounded {

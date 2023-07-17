@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- menu icon -->
+    <!-- menu icon start-->
     <div class="block md:hidden fixed top-0 right-0 mt-4 mr-4 z-50">
       <button
         @click="smallScreen = !smallScreen"
@@ -9,16 +9,16 @@
         <i class="fas fa-bars"></i>
       </button>
     </div>
-    <!-- menu icon -->
+    <!-- menu icon end -->
     <div class="grid grid-cols-4">
       <div
-        class=""
+        class="navcard"
         :class="{
           'col-span-1 hidden md:block': !smallScreen,
           'col-span-4': smallScreen,
         }"
       >
-        <div class="sidenav card">
+        <div class="sidenav card fixed h-screen overflow-y-auto">
           <div class="habitfeed-logo">
             <h1>21DAYs</h1>
           </div>
@@ -150,7 +150,8 @@ export default {
   border-bottom: 1px solid #e2e8f0;
   background-color: #fff;
   padding: 1rem;
-  @apply h-screen;
+  width: 20%;
+  @apply min-w-[16rem] h-screen;
 }
 .logout {
   @apply mx-auto text-2xl md:mt-20 mt-5;
@@ -162,9 +163,10 @@ export default {
 .logout i {
   @apply ml-2;
 }
+
 .content {
   @apply mx-auto h-screen;
-  width: 70%;
+  width: 80%;
 }
 
 @media (max-width: 768px) {

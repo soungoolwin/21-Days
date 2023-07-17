@@ -72,4 +72,15 @@ router.beforeEach(async (to, from, next) => {
   }
 });
 
+//guard login route / if user is already logged in
+router.beforeEach(async (to, from, next) => {
+  let isAuthenticated = await isUserLoggedIn();
+
+  if (to.path === "/" && isAuthenticated) {
+    next("/habit-feed");
+  } else {
+    next();
+  }
+});
+
 export default router;
