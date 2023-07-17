@@ -1,42 +1,89 @@
 <template>
+  <div v-if="loading">
+    <LoadingSpinner></LoadingSpinner>
+  </div>
   <div class="contentcard" v-for="habit in habits" :key="habit._id">
-    <div class="md:grid md:grid-cols-3">
-      <div class="md:col-span-2">
+    <div class="flex justify-between">
+      <div>
         <h3 class="text-lg font-semibold">{{ habit.habitTitle }}</h3>
       </div>
-      <div class="col-span-1 flex md:justify-end items-center">
-        <button class="joinButton">Join</button>
+
+      <div>
+        <p class="text-gray-500">{{ habit.habitStatus }}</p>
       </div>
     </div>
-    <div class="mt-4 flex md:justify-end">
-      <p class="text-gray-500">10 people joined</p>
-    </div>
+  </div>
+  <div class="flex justify-center">
+    <button v-if="currentPage > 1" class="paginateButton" @click="prevPage()">
+      Previous
+    </button>
+    <button
+      v-if="currentPage < lastPage"
+      class="paginateButton"
+      @click="nextPage()"
+    >
+      Next
+    </button>
   </div>
 </template>
 
 <script>
+import LoadingSpinner from "../components/LoadingSpinner";
 import { onMounted, ref } from "vue";
 import axios from "axios";
 export default {
+  components: { LoadingSpinner },
   setup() {
     let smallScreen = ref(false);
     let habits = ref([]);
     let currentPage = ref(1);
+    let lastPage = ref();
+    let loading = ref(true);
+    let endPoint = ref("/api/v1/habit/getAllHabits?page=");
 
-    onMounted(async () => {
+    let nextPage = async () => {
+      loading.value = true;
+      currentPage.value++;
+      await getHabits(currentPage.value);
+      loading.value = false;
+    };
+    let prevPage = async () => {
+      loading.value = true;
+      currentPage.value--;
+      await getHabits(currentPage.value);
+      loading.value = false;
+    };
+    let getHabits = async (currentPage) => {
       try {
-        let response = await axios.get(
-          "/api/v1/habit/getAllHabits?page=" + currentPage.value
-        );
+        let response = await axios.get(endPoint.value + currentPage);
         habits.value = response.data.data;
+        lastPage.value = response.data.totalNoOfPages;
+        loading.value = false;
       } catch (error) {
         console.error("Error fetching habits:", error);
       }
+    };
+
+    onMounted(() => {
+      getHabits(currentPage.value);
     });
 
-    return { smallScreen, habits };
+    return {
+      smallScreen,
+      habits,
+      currentPage,
+      lastPage,
+      nextPage,
+      prevPage,
+      loading,
+    };
   },
 };
 </script>
 
-<style></style>
+<style>
+.paginateButton {
+  @apply px-4 py-2 text-white rounded-md hover:bg-green-600 my-10 mx-3;
+  background-color: #61c9a8;
+}
+</style>

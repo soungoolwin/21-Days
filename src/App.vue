@@ -1,9 +1,14 @@
 <template>
+  <LoadingSpinner v-if="loading"></LoadingSpinner>
   <router-view />
 </template>
 
 <script>
-export default {};
+import LoadingSpinner from "./components/LoadingSpinner";
+export default {
+  components: { LoadingSpinner },
+  setup() {},
+};
 </script>
 <style>
 #app {
