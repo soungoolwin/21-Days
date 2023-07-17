@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- menu icon start-->
+    <!-- menu icon -->
     <div class="block md:hidden fixed top-0 right-0 mt-4 mr-4 z-50">
       <button
         @click="smallScreen = !smallScreen"
@@ -9,16 +9,22 @@
         <i class="fas fa-bars"></i>
       </button>
     </div>
-    <!-- menu icon end -->
+    <!-- menu icon -->
     <div class="grid grid-cols-4">
       <div
-        class="navcard"
+        class=""
         :class="{
           'col-span-1 hidden md:block': !smallScreen,
           'col-span-4': smallScreen,
         }"
       >
-        <div class="sidenav card fixed h-screen overflow-y-auto">
+        <div
+          class=""
+          :class="{
+            'bigScreensidenav test': !smallScreen,
+            smallScreensidenav: smallScreen,
+          }"
+        >
           <div class="habitfeed-logo">
             <h1>21DAYs</h1>
           </div>
@@ -143,15 +149,15 @@ export default {
   background-color: #61c9a8;
   @apply py-3 px-3 rounded-3xl;
 }
-.sidenav {
+.bigScreensidenav {
   border-top-right-radius: 80px;
   border-top: 1px solid #e2e8f0;
   border-bottom-right-radius: 80px;
   border-bottom: 1px solid #e2e8f0;
   background-color: #fff;
   padding: 1rem;
-  width: 20%;
-  @apply min-w-[16rem] h-screen;
+  width: 100%;
+  @apply h-screen;
 }
 .logout {
   @apply mx-auto text-2xl md:mt-20 mt-5;
@@ -163,18 +169,19 @@ export default {
 .logout i {
   @apply ml-2;
 }
-
 .content {
   @apply mx-auto h-screen;
-  width: 80%;
+  width: 70%;
 }
 
-@media (max-width: 768px) {
-  .sidenav {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    @apply h-screen;
-    height: fit-content;
-  }
+.smallScreensidenav {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  @apply h-screen;
+  height: fit-content;
+}
+.test {
+  position: fixed;
+  width: 20%;
 }
 </style>
