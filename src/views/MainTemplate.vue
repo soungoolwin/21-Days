@@ -177,7 +177,7 @@ export default {
 .smallScreensidenav {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  @apply h-screen;
+  @apply h-screen px-5 py-5;
   height: fit-content;
 }
 .test {

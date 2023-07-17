@@ -1,7 +1,7 @@
 <template>
-  <div v-if="loading">
+  <!-- <div v-if="loading">
     <LoadingSpinner></LoadingSpinner>
-  </div>
+  </div> -->
   <div class="contentcard" v-for="habit in habits" :key="habit._id">
     <div class="flex justify-between">
       <div>

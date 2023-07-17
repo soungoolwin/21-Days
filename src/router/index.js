@@ -1,5 +1,7 @@
+import { createApp } from "vue";
+
 import { createRouter, createWebHistory } from "vue-router";
-import axios from "axios";
+import LoadingSpinner from "../components/LoadingSpinner.vue";
 import isUserLoggedIn from "@/composables/isUserLoggedIn";
 import LoginRegisterTemplate from "../views/LoginRegisterTemplate.vue";
 import HabitFeed from "../views/HabitFeed.vue";
@@ -7,6 +9,10 @@ import MainTemplate from "../views/MainTemplate.vue";
 import Profile from "../views/Profile.vue";
 import LeaderBoard from "../views/LeaderBoard.vue";
 import Create from "../views/Create.vue";
+const loadingSpinnerApp = createApp(LoadingSpinner);
+const loadingSpinnerInstance = loadingSpinnerApp.mount(
+  document.createElement("div")
+);
 
 const routes = [
   {
@@ -74,11 +80,17 @@ router.beforeEach(async (to, from, next) => {
 
 //guard login route / if user is already logged in
 router.beforeEach(async (to, from, next) => {
+  //loading spinner add
+  document.body.appendChild(loadingSpinnerInstance.$el);
+
+  //auth check
   let isAuthenticated = await isUserLoggedIn();
 
   if (to.path === "/" && isAuthenticated) {
+    document.body.removeChild(loadingSpinnerInstance.$el);
     next("/habit-feed");
   } else {
+    document.body.removeChild(loadingSpinnerInstance.$el);
     next();
   }
 });

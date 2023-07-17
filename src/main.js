@@ -1,6 +1,16 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import router from "./router";
 import LoadingSpinner from "./components/LoadingSpinner.vue";
+import router from "./router";
 
-createApp(App).use(router).mount("#app");
+// createApp(App).use(router).mount("#app");
+const app = createApp(App);
+
+// Register the LoadingSpinner component globally
+app.component("loading-spinner", LoadingSpinner);
+
+// Use the router plugin
+app.use(router);
+
+// Mount the app to the DOM element with the ID 'app'
+app.mount("#app");
