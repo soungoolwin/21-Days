@@ -69,9 +69,13 @@ router.beforeEach((to, from, next) => {
 
 //redirect to loginpage when non user login to login only pages
 router.beforeEach(async (to, from, next) => {
+  //loading spinner add
+  document.body.appendChild(loadingSpinnerInstance.$el);
   let isAuthenticated = await isUserLoggedIn();
 
   if (to.path === "/habit-feed" && !isAuthenticated) {
+    //loading spinner remove
+    document.body.removeChild(loadingSpinnerInstance.$el);
     next("/"); // Redirect to login page
   } else {
     next(); // Allow navigation to the requested route
@@ -80,14 +84,10 @@ router.beforeEach(async (to, from, next) => {
 
 //guard login route / if user is already logged in
 router.beforeEach(async (to, from, next) => {
-  //loading spinner add
-  document.body.appendChild(loadingSpinnerInstance.$el);
-
   //auth check
   let isAuthenticated = await isUserLoggedIn();
 
   if (to.path === "/" && isAuthenticated) {
-    document.body.removeChild(loadingSpinnerInstance.$el);
     next("/habit-feed");
   } else {
     document.body.removeChild(loadingSpinnerInstance.$el);
