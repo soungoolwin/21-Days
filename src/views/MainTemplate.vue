@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="currentUser">
     <!-- menu icon -->
     <div class="block md:hidden fixed top-0 right-0 mt-4 mr-4 z-50">
       <button
@@ -35,7 +35,7 @@
               alt=""
               class="profileimg"
             />
-            <h3>Soung Oo Lwin</h3>
+            <h3>{{ currentUser.username }}</h3>
           </div>
 
           <div class="navlink">
@@ -100,14 +100,16 @@
 
 <script>
 import HabitFeed from "./HabitFeed";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import getCurrentUser from "../composables/getCurrentUser";
 export default {
   components: { HabitFeed },
   setup() {
     let smallScreen = ref(false);
     let router = useRouter();
+    let currentUser = ref();
 
     let logout = async () => {
       let response = await axios.delete("/api/v1/auth/logout");
@@ -115,7 +117,11 @@ export default {
         router.push("/");
       }
     };
-    return { smallScreen, logout };
+
+    onMounted(async () => {
+      currentUser.value = await getCurrentUser();
+    });
+    return { smallScreen, logout, currentUser };
   },
 };
 </script>
@@ -171,7 +177,7 @@ export default {
 }
 .content {
   @apply mx-auto h-screen;
-  width: 70%;
+  width: 80%;
 }
 
 .smallScreensidenav {

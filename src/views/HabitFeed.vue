@@ -1,7 +1,4 @@
 <template>
-  <!-- <div v-if="loading">
-    <LoadingSpinner></LoadingSpinner>
-  </div> -->
   <div class="contentcard" v-for="habit in habits" :key="habit._id">
     <div class="flex justify-between">
       <div>
@@ -32,6 +29,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import { onMounted, ref } from "vue";
 import axios from "axios";
 export default {
+  props: ["currentUser"],
   components: { LoadingSpinner },
   setup() {
     let smallScreen = ref(false);
