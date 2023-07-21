@@ -5,36 +5,36 @@
 
       <div class="grid grid-cols-5 gap-8 mt-10">
         <!-- First Column: Profile Image -->
-        <div class="col-span-1">
+        <div class="md:col-span-1 col-span-2">
           <img
             src="../../public/images/profile.webp"
             alt=""
-            class="rounded-full w-full"
+            class="rounded-full"
           />
         </div>
 
         <!-- Second Column: Name and Bio -->
-        <div class="col-span-3">
+        <div class="md:col-span-3 col-span-2 mt-[5%]">
           <h2 class="md:text-xl font-semibold">{{ currentUser.username }}</h2>
-          <p class="text-gray-600 mt-[10%]">{{ currentUser.bio }}</p>
+          <p class="text-gray-600">{{ currentUser.bio }}</p>
         </div>
 
         <!-- Third Column: Edit Button -->
-        <div class="col-span-1 mt-[15%]">
+        <div class="col-span-1 mt-[15%] align-middle">
           <button class="py-2">Edit</button>
         </div>
       </div>
 
       <div class="w-[60%] mx-auto mt-10">
         <div class="flex justify-between">
-          <div class="flex items-center justify-center">
+          <div class="flex items-center justify-center mr-2">
             <h2 class="text-center">
               <span class="block font-bold">23</span>
               <span class="block">Completed</span>
             </h2>
           </div>
 
-          <div class="flex items-center justify-center">
+          <div class="flex items-center justify-center mr-2">
             <h2 class="text-center">
               <span class="block font-bold">12</span>
               <span class="block">Ongoing</span>
