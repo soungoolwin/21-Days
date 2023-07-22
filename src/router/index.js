@@ -90,7 +90,6 @@ router.beforeEach(async (to, from, next) => {
   if (to.path === "/" && isAuthenticated) {
     next("/habit-feed");
   } else {
-    document.body.removeChild(loadingSpinnerInstance.$el);
     next();
   }
 });
