@@ -79,9 +79,4 @@ export default {
 };
 </script>
 
-<style>
-.paginateButton {
-  @apply px-4 py-2 text-white rounded-md hover:bg-green-600 my-10 mx-3;
-  background-color: #61c9a8;
-}
-</style>
+<style></style>

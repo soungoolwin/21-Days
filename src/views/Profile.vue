@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <div v-for="userHabit in userHabits" :key="userHabit._id">
+      <div v-for="userHabit in displayHabits" :key="userHabit._id">
         <div class="contentcard">
           <div class="flex justify-between">
             <div>
@@ -60,6 +60,22 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="flex justify-center">
+      <button
+        @click="previousPage"
+        v-if="currentPage > 1"
+        class="paginateButton"
+      >
+        Previous
+      </button>
+      <button
+        @click="nextPage"
+        v-if="currentPage < totalPages"
+        class="paginateButton"
+      >
+        Next
+      </button>
     </div>
   </div>
 </template>
@@ -96,6 +112,32 @@ export default {
       userHabits.value.filter((habit) => habit.habitStatus === "Building")
     );
 
+    //Computed properties to make frontend pagination
+    const pageSize = 5;
+    const currentPage = ref(1);
+
+    const totalPages = computed(() =>
+      Math.ceil(userHabits.value.length / pageSize)
+    );
+
+    const displayHabits = computed(() => {
+      const startIndex = (currentPage.value - 1) * pageSize;
+      const endIndex = startIndex + pageSize;
+      return userHabits.value.slice(startIndex, endIndex);
+    });
+
+    const nextPage = () => {
+      if (currentPage.value < totalPages.value) {
+        currentPage.value++;
+      }
+    };
+
+    const previousPage = () => {
+      if (currentPage.value > 1) {
+        currentPage.value--;
+      }
+    };
+    //
     onMounted(async () => {
       await getCurrentUserandHabits();
     });
@@ -105,6 +147,11 @@ export default {
       getCurrentUserandHabits,
       builtHabits,
       buildingHabits,
+      displayHabits,
+      nextPage,
+      previousPage,
+      currentPage,
+      totalPages,
     };
   },
 };
