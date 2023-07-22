@@ -1,5 +1,5 @@
 <template>
-  <div v-if="currentUser">
+  <div>
     <div class="my-10 mx-auto w-[80%]">
       <h1 class="text-2xl">My Profile</h1>
 
@@ -15,8 +15,10 @@
 
         <!-- Second Column: Name and Bio -->
         <div class="md:col-span-3 col-span-2 mt-[5%]">
-          <h2 class="md:text-xl font-semibold">{{ currentUser.username }}</h2>
-          <p class="text-gray-600">{{ currentUser.bio }}</p>
+          <h2 class="md:text-xl font-semibold">
+            {{ currentLoginUser.username }}
+          </h2>
+          <p class="text-gray-600">{{ currentLoginUser.bio }}</p>
         </div>
 
         <!-- Third Column: Edit Button -->
@@ -29,30 +31,32 @@
         <div class="flex justify-between">
           <div class="flex items-center justify-center mr-2">
             <h2 class="text-center">
-              <span class="block font-bold">23</span>
+              <span class="block font-bold">{{ builtHabits.length }}</span>
               <span class="block">Completed</span>
             </h2>
           </div>
 
           <div class="flex items-center justify-center mr-2">
             <h2 class="text-center">
-              <span class="block font-bold">12</span>
+              <span class="block font-bold">{{ buildingHabits.length }}</span>
               <span class="block">Ongoing</span>
             </h2>
           </div>
         </div>
       </div>
 
-      <div class="contentcard">
-        <div class="flex justify-between">
-          <div>
-            <h3 class="text-lg font-semibold">
-              Drink a cup of water every morning
-            </h3>
-          </div>
+      <div v-for="userHabit in userHabits" :key="userHabit._id">
+        <div class="contentcard">
+          <div class="flex justify-between">
+            <div>
+              <h3 class="text-lg font-semibold">
+                {{ userHabit.habitTitle }}
+              </h3>
+            </div>
 
-          <div>
-            <p class="text-gray-500">Ongoing</p>
+            <div>
+              <p class="text-gray-500">{{ userHabit.habitStatus }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -61,16 +65,47 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
-import getCurrentUser from "@/composables/getCurrentUser";
+import { computed, onMounted, ref } from "vue";
+import axios from "axios";
+
 export default {
   setup() {
-    let currentUser = ref();
+    let currentLoginUser = ref({});
+    let userHabits = ref([]);
+
+    let getCurrentUserandHabits = async () => {
+      try {
+        let response = await axios.get(
+          "/api/v1/user/showCurrentUserAndItsHabits"
+        );
+
+        if (response.status == 200) {
+          currentLoginUser.value = response.data.user;
+          userHabits.value = response.data.habits;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    // Computed properties to separate built and building habits and get their counts
+    let builtHabits = computed(() =>
+      userHabits.value.filter((habit) => habit.habitStatus === "Built")
+    );
+    let buildingHabits = computed(() =>
+      userHabits.value.filter((habit) => habit.habitStatus === "Building")
+    );
 
     onMounted(async () => {
-      currentUser.value = await getCurrentUser();
+      await getCurrentUserandHabits();
     });
-    return { currentUser };
+    return {
+      currentLoginUser,
+      userHabits,
+      getCurrentUserandHabits,
+      builtHabits,
+      buildingHabits,
+    };
   },
 };
 </script>
