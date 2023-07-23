@@ -30,6 +30,7 @@
           type="file"
           id="profileImg"
           name="start-date"
+          v-on:change="console.log('hello')"
           required
         />
       </div>
