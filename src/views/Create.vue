@@ -31,7 +31,8 @@
         <label class="formlabel" for="start-date">Start Date</label>
         <input
           class="forminput"
-          type="datetime-local"
+          type="date"
+          inputmode="date"
           id="start-date"
           name="start-date"
           v-model="startDate"

@@ -7,6 +7,7 @@ import LoginRegisterTemplate from "../views/LoginRegisterTemplate.vue";
 import HabitFeed from "../views/HabitFeed.vue";
 import MainTemplate from "../views/MainTemplate.vue";
 import Profile from "../views/Profile.vue";
+import ProfileEdit from "../views/ProfileEdit.vue";
 import LeaderBoard from "../views/LeaderBoard.vue";
 import Create from "../views/Create.vue";
 const loadingSpinnerApp = createApp(LoadingSpinner);
@@ -38,6 +39,11 @@ const routes = [
         path: "/profile",
         name: "Profile",
         component: Profile,
+      },
+      {
+        path: "/profile/edit",
+        name: "ProfileEdit",
+        component: ProfileEdit,
       },
       {
         path: "/leader-board",

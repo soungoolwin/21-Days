@@ -23,7 +23,9 @@
 
         <!-- Third Column: Edit Button -->
         <div class="col-span-1 mt-[15%] align-middle">
-          <button class="py-2">Edit</button>
+          <router-link class="py-2" :to="{ name: 'ProfileEdit' }"
+            >Edit</router-link
+          >
         </div>
       </div>
 

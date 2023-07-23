@@ -2,6 +2,8 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import LoadingSpinner from "./components/LoadingSpinner.vue";
 import router from "./router";
+import "../public/tailwind.css";
+import "../src/style.css";
 
 // createApp(App).use(router).mount("#app");
 const app = createApp(App);

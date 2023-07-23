@@ -44,3 +44,13 @@
 .habitCreateButton {
   @apply bg-[#61C9A8] hover:bg-green-600 text-white font-bold py-2 px-4 rounded;
 }
+
+/* ProfileEdit.vue */
+
+.profileEditCard {
+  @apply bg-white shadow-lg flex-1 mx-4 p-8 mt-[17%] rounded-xl;
+}
+
+.profileEditButton {
+  @apply bg-[#61C9A8] hover:bg-green-600 text-white font-bold py-2 px-4 rounded;
+}
