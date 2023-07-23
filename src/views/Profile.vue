@@ -6,11 +6,7 @@
       <div class="grid grid-cols-5 gap-8 mt-10">
         <!-- First Column: Profile Image -->
         <div class="md:col-span-1 col-span-2">
-          <img
-            src="../../public/images/profile.webp"
-            alt=""
-            class="rounded-full"
-          />
+          <img :src="currentLoginUser.image" alt="" class="rounded-full" />
         </div>
 
         <!-- Second Column: Name and Bio -->

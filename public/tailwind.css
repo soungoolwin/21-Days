@@ -883,6 +883,24 @@ video {
   display: block;
 }
 
+.Submitbutton {
+  border-radius: 0.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(97 201 168 / var(--tw-bg-opacity));
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.Submitbutton:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+}
+
 .formerror {
   margin-bottom: 1.25rem;
   --tw-text-opacity: 1;

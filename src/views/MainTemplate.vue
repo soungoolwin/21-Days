@@ -30,11 +30,7 @@
           </div>
 
           <div class="profile">
-            <img
-              src="../../public/images/profile.webp"
-              alt=""
-              class="profileimg"
-            />
+            <img :src="currentUser.image" alt="" class="profileimg" />
             <h3>{{ currentUser.username }}</h3>
           </div>
 
