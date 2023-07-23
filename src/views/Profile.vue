@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="my-10 mx-auto w-[80%]">
+  <div v-if="currentLoginUser">
+    <div class="profileCard">
       <h1 class="text-2xl">My Profile</h1>
 
       <div class="grid grid-cols-5 gap-8 mt-10">
@@ -27,6 +27,7 @@
         </div>
       </div>
 
+      <!-- completed, ongoing count -->
       <div class="w-[60%] mx-auto mt-10">
         <div class="flex justify-between">
           <div class="flex items-center justify-center mr-2">
@@ -158,7 +159,7 @@ export default {
 </script>
 
 <style>
-.biosector {
-  width: 100%;
+.profileCard {
+  @apply my-10 mx-auto w-[80%];
 }
 </style>

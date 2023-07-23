@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white shadow-lg flex-1 mx-4 p-8 mt-[17%] rounded-xl">
+  <div class="habitcreateCard">
     <h2 class="formheader">Create Habit</h2>
     <form @submit.prevent="createHabit()">
       <div class="mb-4">
@@ -25,7 +25,6 @@
           name="habit-description"
           v-model="habitDescription"
           placeholder="Enter your habit description"
-          required
         />
       </div>
       <div class="mb-4">
@@ -58,12 +57,7 @@
       <div v-if="error" class="text-red-500">
         {{ error }}
       </div>
-      <button
-        class="bg-[#61C9A8] hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-        type="submit"
-      >
-        Create
-      </button>
+      <button class="habitCreateButton" type="submit">Create</button>
     </form>
   </div>
 </template>

@@ -22,7 +22,7 @@
 .formerror {
   @apply text-red-500 mb-5;
 }
-/* Habit Feed */
+/* HabitFeed.vue */
 .contentcard {
   @apply mt-11 rounded-3xl bg-white  shadow-lg p-8  mx-auto;
 }
@@ -35,4 +35,12 @@
 .paginateButton {
   @apply px-4 py-2 text-white rounded-md hover:bg-green-600 my-10 mx-3;
   background-color: #61c9a8;
+}
+
+/* Create.vue */
+.habitcreateCard {
+  @apply bg-white shadow-lg flex-1 mx-4 p-8 mt-[17%] rounded-xl;
+}
+.habitCreateButton {
+  @apply bg-[#61C9A8] hover:bg-green-600 text-white font-bold py-2 px-4 rounded;
 }
