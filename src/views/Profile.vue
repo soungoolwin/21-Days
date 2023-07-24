@@ -82,9 +82,11 @@
 <script>
 import { computed, onMounted, ref } from "vue";
 import axios from "axios";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
+    let router = useRouter();
     let currentLoginUser = ref({});
     let userHabits = ref([]);
 
@@ -99,7 +101,12 @@ export default {
           userHabits.value = response.data.habits;
         }
       } catch (error) {
-        console.log(error);
+        const errorMessage = error.response.data.message;
+        const errorStatus = error.response.status;
+        router.push({
+          name: "ErrorTemplate",
+          params: { errorMessage, errorStatus },
+        });
       }
     };
 

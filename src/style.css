@@ -69,7 +69,7 @@
 /* ProfileEdit.vue */
 
 .profileEditCard {
-  @apply bg-white shadow-lg flex-1 mx-4 p-8 mt-[17%] rounded-xl;
+  @apply bg-white shadow-lg flex-1 mx-4 p-8 mt-[10%] rounded-xl;
 }
 
 .profileEditButton {

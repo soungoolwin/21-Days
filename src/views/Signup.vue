@@ -101,12 +101,20 @@ export default {
         console.log("something wrong");
         router.push("/");
       }
-      let response = await axios.post("/api/v1/auth/register", {
-        email: email.value,
-        username: username.value,
-        password: password.value,
-      });
-      console.log(response);
+      try {
+        let response = await axios.post("/api/v1/auth/register", {
+          email: email.value,
+          username: username.value,
+          password: password.value,
+        });
+      } catch (error) {
+        const errorMessage = error.response.data.message;
+        const errorStatus = error.response.status;
+        router.push({
+          name: "ErrorTemplate",
+          params: { errorMessage, errorStatus },
+        });
+      }
     };
 
     return {

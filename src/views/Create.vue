@@ -91,7 +91,12 @@ export default {
           error.value = response.data.message;
         }
       } catch (error) {
-        console.log(error);
+        const errorMessage = error.response.data.message;
+        const errorStatus = error.response.status;
+        router.push({
+          name: "ErrorTemplate",
+          params: { errorMessage, errorStatus },
+        });
       }
     };
 

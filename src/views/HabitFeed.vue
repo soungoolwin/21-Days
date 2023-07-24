@@ -28,10 +28,12 @@
 import LoadingSpinner from "../components/LoadingSpinner";
 import { onMounted, ref } from "vue";
 import axios from "axios";
+import { useRouter } from "vue-router";
 export default {
   props: ["currentUser"],
   components: { LoadingSpinner },
   setup() {
+    let router = useRouter();
     let smallScreen = ref(false);
     let habits = ref([]);
     let currentPage = ref(1);
@@ -58,7 +60,12 @@ export default {
         lastPage.value = response.data.totalNoOfPages;
         loading.value = false;
       } catch (error) {
-        console.error("Error fetching habits:", error);
+        const errorMessage = error.response.data.message;
+        const errorStatus = error.response.status;
+        router.push({
+          name: "ErrorTemplate",
+          params: { errorMessage, errorStatus },
+        });
       }
     };
 

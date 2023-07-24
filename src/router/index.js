@@ -9,6 +9,7 @@ import MainTemplate from "../views/MainTemplate.vue";
 import Profile from "../views/Profile.vue";
 import ProfileEdit from "../views/ProfileEdit.vue";
 import LeaderBoard from "../views/LeaderBoard.vue";
+import ErrorTemplate from "../components/ErrorTemplate.vue";
 import Create from "../views/Create.vue";
 const loadingSpinnerApp = createApp(LoadingSpinner);
 const loadingSpinnerInstance = loadingSpinnerApp.mount(
@@ -20,11 +21,6 @@ const routes = [
     path: "/",
     name: "LoginRegisterTemplate",
     component: LoginRegisterTemplate,
-  },
-  {
-    path: "/habit-feed",
-    name: "HabitFeed",
-    component: HabitFeed,
   },
   {
     path: "/main-template",
@@ -56,6 +52,12 @@ const routes = [
         component: Create,
       },
     ],
+  },
+  {
+    path: "/error/:errorMessage/:errorStatus",
+    name: "ErrorTemplate",
+    component: ErrorTemplate,
+    props: true,
   },
 ];
 

@@ -71,7 +71,12 @@ export default defineComponent({
         bio.value = response.data.data.bio;
         imageUrl.value = response.data.data.image;
       } catch (error) {
-        console.log(error);
+        const errorMessage = error.response.data.message;
+        const errorStatus = error.response.status;
+        router.push({
+          name: "ErrorTemplate",
+          params: { errorMessage, errorStatus },
+        });
       }
     };
     let getProfileImgLink = async (event) => {
@@ -95,7 +100,12 @@ export default defineComponent({
         // Handle the response from the server
         imageUrl.value = response.data.data;
       } catch (error) {
-        console.log(error);
+        const errorMessage = error.response.data.message;
+        const errorStatus = error.response.status;
+        router.push({
+          name: "ErrorTemplate",
+          params: { errorMessage, errorStatus },
+        });
       }
     };
 
@@ -119,7 +129,12 @@ export default defineComponent({
           router.push("/profile");
         }
       } catch (error) {
-        console.log(error);
+        const errorMessage = error.response.data.message;
+        const errorStatus = error.response.status;
+        router.push({
+          name: "ErrorTemplate",
+          params: { errorMessage, errorStatus },
+        });
       }
     };
     onMounted(async () => {

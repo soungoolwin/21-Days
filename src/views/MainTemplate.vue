@@ -108,9 +108,18 @@ export default defineComponent({
     let currentUser = ref();
 
     let logout = async () => {
-      let response = await axios.delete("/api/v1/auth/logout");
-      if (response.status === 200) {
-        router.push("/");
+      try {
+        let response = await axios.delete("/api/v1/auth/logout");
+        if (response.status === 200) {
+          router.push("/");
+        }
+      } catch (error) {
+        const errorMessage = error.response.data.message;
+        const errorStatus = error.response.status;
+        router.push({
+          name: "ErrorTemplate",
+          params: { errorMessage, errorStatus },
+        });
       }
     };
 
