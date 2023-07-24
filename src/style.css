@@ -47,6 +47,25 @@
   @apply bg-[#61C9A8] hover:bg-green-600 text-white font-bold py-2 px-4 rounded;
 }
 
+/* Profile.vue */
+.profileCard {
+  @apply my-10 mx-auto w-[80%];
+}
+
+.profileImage {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  @apply rounded-full;
+}
+
+@media screen and (max-width: 767px) {
+  .profileImage {
+    width: 80px;
+    height: 80px;
+  }
+}
+
 /* ProfileEdit.vue */
 
 .profileEditCard {

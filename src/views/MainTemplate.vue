@@ -132,6 +132,7 @@ export default {
 .profileimg {
   width: 80px;
   height: 80px;
+  object-fit: cover;
   @apply mx-auto mt-20 rounded-full mb-5;
 }
 .navlink {

@@ -576,11 +576,6 @@ video {
   margin-right: auto;
 }
 
-.my-10 {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
-}
-
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -639,10 +634,6 @@ video {
 
 .w-\[60\%\] {
   width: 60%;
-}
-
-.w-\[80\%\] {
-  width: 80%;
 }
 
 .w-full {
@@ -998,6 +989,31 @@ video {
 .habitCreateButton:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+}
+
+/* Profile.vue */
+
+.profileCard {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.profileImage {
+  width: 110px;
+  height: 110px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 9999px;
+}
+
+@media screen and (max-width: 767px) {
+  .profileImage {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 /* ProfileEdit.vue */
