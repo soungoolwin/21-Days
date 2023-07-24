@@ -33,6 +33,10 @@
           v-on:change="getProfileImgLink"
         />
       </div>
+      <!-- image preview -->
+      <div v-if="imageUrl">
+        <img :src="imageUrl" class="previewImage" alt="Profile Image" />
+      </div>
 
       <button class="profileEditButton" type="submit">Update</button>
     </form>
@@ -63,6 +67,7 @@ export default {
     let getProfileImgLink = async (event) => {
       const file = event.target.files[0];
       image.value = file;
+      previewImage(file);
 
       try {
         let response = await axios.post(
@@ -72,7 +77,7 @@ export default {
           },
           {
             headers: {
-              "Content-Type": "multipart/form-data", // Correctly set the Content-Type header
+              "Content-Type": "multipart/form-data",
             },
           }
         );
@@ -82,6 +87,14 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    };
+
+    const previewImage = (file) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imageUrl.value = e.target.result;
+      };
+      reader.readAsDataURL(file);
     };
 
     let updateProfile = async () => {
@@ -102,9 +115,15 @@ export default {
       await getUser();
     });
 
-    return { userName, bio, image, getProfileImgLink, updateProfile };
+    return { userName, bio, image, imageUrl, getProfileImgLink, updateProfile };
   },
 };
 </script>
 
-<style></style>
+<style>
+.previewImage {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+</style>
