@@ -88,7 +88,7 @@
           'hidden md:block': smallScreen,
         }"
       >
-        <router-view></router-view>
+        <router-view @profileUpdated="updateSideNav"></router-view>
       </div>
     </div>
   </div>
@@ -96,11 +96,11 @@
 
 <script>
 import HabitFeed from "./HabitFeed";
-import { onMounted, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import getCurrentUser from "../composables/getCurrentUser";
-export default {
+export default defineComponent({
   components: { HabitFeed },
   setup() {
     let smallScreen = ref(false);
@@ -114,12 +114,20 @@ export default {
       }
     };
 
+    //this is event emit from ProfileEdit.vue to update sidenav profile data
+    let updateSideNav = (updateData) => {
+      currentUser.value.username = updateData.userName;
+      currentUser.value.bio = updateData.bio;
+      currentUser.value.image = updateData.imageUrl;
+    };
+    //this is event emit from ProfileEdit.vue to update sidenav profile data
     onMounted(async () => {
       currentUser.value = await getCurrentUser();
     });
-    return { smallScreen, logout, currentUser };
+
+    return { smallScreen, logout, currentUser, updateSideNav };
   },
-};
+});
 </script>
 
 <style>
