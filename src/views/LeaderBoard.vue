@@ -7,8 +7,8 @@
       <th class="small-width">Count</th>
     </tr>
 
-    <tr v-for="user in usersInLeaderboard" :key="user._id">
-      <td>1</td>
+    <tr v-for="(user, index) in usersInLeaderboard" :key="index">
+      <td>{{ index + 1 }}</td>
       <td>{{ user.username }}</td>
       <td>{{ user.habitsBuilt }}</td>
     </tr>
