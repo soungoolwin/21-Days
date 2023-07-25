@@ -11,6 +11,7 @@ import ProfileEdit from "../views/ProfileEdit.vue";
 import LeaderBoard from "../views/LeaderBoard.vue";
 import ErrorTemplate from "../components/ErrorTemplate.vue";
 import Create from "../views/Create.vue";
+import VerifyEmail from "../components/VerifyEmail.vue";
 const loadingSpinnerApp = createApp(LoadingSpinner);
 const loadingSpinnerInstance = loadingSpinnerApp.mount(
   document.createElement("div")
@@ -59,6 +60,11 @@ const routes = [
     name: "ErrorTemplate",
     component: ErrorTemplate,
     props: true,
+  },
+  {
+    path: "/verify",
+    name: "VerifyEmail",
+    component: VerifyEmail,
   },
 ];
 
