@@ -88,7 +88,13 @@
           'hidden md:block': smallScreen,
         }"
       >
-        <router-view @profileUpdated="updateSideNav"></router-view>
+        <!-- to solve for non event emit component warning -->
+        <div v-if="isProfileEditRoute">
+          <ProfileEdit @profileUpdated="updateSideNav"></ProfileEdit>
+        </div>
+        <div v-else>
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
@@ -96,13 +102,16 @@
 
 <script>
 import HabitFeed from "./HabitFeed";
-import { defineComponent, onMounted, ref } from "vue";
+import ProfileEdit from "./ProfileEdit.vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import getCurrentUser from "../composables/getCurrentUser";
 export default defineComponent({
-  components: { HabitFeed },
+  components: { HabitFeed, ProfileEdit },
   setup() {
+    let route = useRoute();
     let smallScreen = ref(false);
     let router = useRouter();
     let currentUser = ref();
@@ -134,7 +143,18 @@ export default defineComponent({
       currentUser.value = await getCurrentUser();
     });
 
-    return { smallScreen, logout, currentUser, updateSideNav };
+    //check is it profile/edit route or not to control conditionally <router-view> or <ProfileEdit/>
+    const isProfileEditRoute = computed(() => {
+      return route.path === "/profile/edit";
+    });
+
+    return {
+      smallScreen,
+      logout,
+      currentUser,
+      updateSideNav,
+      isProfileEditRoute,
+    };
   },
 });
 </script>

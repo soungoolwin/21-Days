@@ -36,15 +36,16 @@ const routes = [
         name: "Profile",
         component: Profile,
       },
-      {
-        path: "/profile/edit",
-        name: "ProfileEdit",
-        component: ProfileEdit,
-      },
+
       {
         path: "/leader-board",
         name: "LeaderBoard",
         component: LeaderBoard,
+      },
+      {
+        path: "/profile/edit",
+        name: "ProfileEdit",
+        component: ProfileEdit,
       },
       {
         path: "/create",

@@ -48,7 +48,7 @@ import axios from "axios";
 import { defineComponent, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 export default defineComponent({
-  emit: ["update"],
+  emit: ["profileUpdated"],
   setup(props, { emit }) {
     let router = new useRouter();
     let userName = ref("");
@@ -56,13 +56,6 @@ export default defineComponent({
     let image = ref(null);
     let imageUrl = ref("");
     //This is event emitter to MainTemplate.vue to update sideNav user data
-    const updateNav = () => {
-      emit("profileUpdated", {
-        userName: userName.value,
-        bio: bio.value,
-        imageUrl: imageUrl.value,
-      });
-    };
 
     let getUser = async () => {
       try {
@@ -125,7 +118,11 @@ export default defineComponent({
           image: imageUrl.value,
         });
         if (response.status == 200) {
-          updateNav(); //update sidenav from MainTemplate.vue
+          emit("profileUpdated", {
+            userName: userName.value,
+            bio: bio.value,
+            imageUrl: imageUrl.value,
+          }); //update sidenav from MainTemplate.vue
           router.push("/profile");
         }
       } catch (error) {
