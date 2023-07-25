@@ -7,22 +7,34 @@
       <th class="small-width">Count</th>
     </tr>
 
-    <tr v-for="(user, index) in usersInLeaderboard" :key="index">
+    <tr v-for="(user, index) in displayHabits" :key="index">
       <td>{{ index + 1 }}</td>
       <td>{{ user.username }}</td>
       <td>{{ user.habitsBuilt }}</td>
     </tr>
   </table>
+  <div class="flex justify-center">
+    <button @click="previousPage" v-if="currentPage > 1" class="paginateButton">
+      Previous
+    </button>
+    <button
+      @click="nextPage"
+      v-if="currentPage < totalPages"
+      class="paginateButton"
+    >
+      Next
+    </button>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 import { useRouter } from "vue-router";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 export default {
   setup() {
     let router = useRouter();
-    let usersInLeaderboard = ref();
+    let usersInLeaderboard = ref([]);
     let getLeaderboard = async () => {
       try {
         let response = await axios.get("/api/v1/user/showLeaderBoard");
@@ -39,10 +51,44 @@ export default {
       }
     };
 
+    //pagination
+    const pageSize = 8;
+    const currentPage = ref(1);
+
+    const totalPages = computed(() =>
+      Math.ceil(usersInLeaderboard.value.length / pageSize)
+    );
+
+    const displayHabits = computed(() => {
+      const startIndex = (currentPage.value - 1) * pageSize;
+      const endIndex = startIndex + pageSize;
+      return usersInLeaderboard.value.slice(startIndex, endIndex);
+    });
+
+    const nextPage = () => {
+      if (currentPage.value < totalPages.value) {
+        currentPage.value++;
+      }
+    };
+
+    const previousPage = () => {
+      if (currentPage.value > 1) {
+        currentPage.value--;
+      }
+    };
+    //pagination
+
     onMounted(async () => {
       await getLeaderboard();
     });
-    return { usersInLeaderboard };
+    return {
+      usersInLeaderboard,
+      displayHabits,
+      currentPage,
+      previousPage,
+      nextPage,
+      totalPages,
+    };
   },
 };
 </script>
