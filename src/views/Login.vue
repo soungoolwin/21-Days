@@ -10,6 +10,7 @@
         name="email"
         v-model="email"
         placeholder="Enter your email"
+        autocomplete="off"
         required
       />
     </div>
@@ -23,6 +24,7 @@
         name="password"
         v-model="password"
         placeholder="Enter your password"
+        autocomplete="off"
         required
       />
       <div v-if="showPassword">

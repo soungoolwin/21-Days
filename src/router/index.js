@@ -61,7 +61,6 @@ const routes = [
     name: "ErrorTemplate",
     component: ErrorTemplate,
     props: true,
-    props: true,
   },
   {
     path: "/verify",

@@ -10,6 +10,7 @@
         name="email"
         v-model="email"
         placeholder="Enter your email"
+        autocomplete="off"
         required
       />
     </div>
@@ -22,6 +23,7 @@
         name="username"
         v-model="username"
         placeholder="Enter your username"
+        autocomplete="off"
         required
       />
     </div>
@@ -34,6 +36,7 @@
         name="password"
         v-model="password"
         placeholder="Enter your password"
+        autocomplete="off"
         required
       />
     </div>
@@ -46,6 +49,7 @@
         name="confirm-password"
         v-model="confirmPassword"
         placeholder="Confirm your password"
+        autocomplete="off"
         required
       />
     </div>
