@@ -12,6 +12,7 @@ import LeaderBoard from "../views/LeaderBoard.vue";
 import ErrorTemplate from "../components/ErrorTemplate.vue";
 import Create from "../views/Create.vue";
 import VerifyEmail from "../components/VerifyEmail.vue";
+import Error404 from "../components/Error404.vue";
 const loadingSpinnerApp = createApp(LoadingSpinner);
 const loadingSpinnerInstance = loadingSpinnerApp.mount(
   document.createElement("div")
@@ -60,11 +61,18 @@ const routes = [
     name: "ErrorTemplate",
     component: ErrorTemplate,
     props: true,
+    props: true,
   },
   {
     path: "/verify",
     name: "VerifyEmail",
     component: VerifyEmail,
+  },
+  // Define a catch-all route for 404 page not found
+  {
+    path: "/:catchAll(.*)",
+    name: "Error404",
+    component: Error404,
   },
 ];
 

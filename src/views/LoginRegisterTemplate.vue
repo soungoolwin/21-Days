@@ -9,7 +9,7 @@
           <h2>
             Embrace New Adventures:
             <br />
-            Try a Hobby for <span class="text-green-500">21 Days!</span>
+            Try a Habit for <span class="text-green-500">21 Days!</span>
           </h2>
         </div>
       </div>
