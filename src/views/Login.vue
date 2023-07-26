@@ -39,6 +39,7 @@
       </div>
     </div>
 
+    <p class="text-red-500 mb-4">{{ errorMsg }}</p>
     <button class="Submitbutton" type="submit">Log in</button>
   </form>
   <p class="text-center pt-5">
@@ -58,10 +59,11 @@ export default {
   setup() {
     let showPassword = ref(false);
     let router = new useRouter();
-
+    let errorMsg = ref("");
     // for login submit
     let email = ref("");
     let password = ref("");
+
     let loginSubmit = async () => {
       try {
         let response = await axios.post("/api/v1/auth/login", {
@@ -74,12 +76,17 @@ export default {
           router.push("/habit-feed");
         }
       } catch (error) {
-        let response = await axios.get("/api/v1/auth/isUserLoggedIn");
-        return response.data.isUserLoggedIn;
+        if (error.response.status == 401) {
+          errorMsg.value = error.response.data.message + "!!!";
+        } else if (error.response.status == 429) {
+          errorMsg.value = error.response.data + "!!!";
+        } else {
+          errorMsg.value = "Something wrong";
+        }
       }
     };
 
-    return { showPassword, email, password, loginSubmit };
+    return { showPassword, email, password, loginSubmit, errorMsg };
   },
 };
 </script>
