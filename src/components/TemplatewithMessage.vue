@@ -1,13 +1,21 @@
 <template>
   <div class="errorContainer">
     <div class="errorCard">
-      <h1 class="text-red-500">No Habits Yet!!</h1>
+      <h1 class="text-red-500">{{ message }}</h1>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { ref } from "vue";
+export default {
+  props: ["message"],
+  setup(props) {
+    let message = ref(props.message);
+
+    return { message };
+  },
+};
 </script>
 
 <style>

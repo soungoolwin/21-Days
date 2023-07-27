@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!habits"><NoHabits /></div>
+  <div v-if="!habits"><TemplatewithMessage message="No Habit Yet!!" /></div>
   <div class="contentcard" v-for="habit in habits" :key="habit._id">
     <div class="flex justify-between">
       <div>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import NoHabits from "../components/NoHabits";
+import TemplatewithMessage from "../components/TemplatewithMessage";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { onMounted, ref } from "vue";
 import axios from "axios";
@@ -34,7 +34,7 @@ import { useRouter } from "vue-router";
 export default {
   props: ["currentUser"],
   components: {
-    NoHabits,
+    TemplatewithMessage,
     LoadingSpinner,
   },
   setup() {

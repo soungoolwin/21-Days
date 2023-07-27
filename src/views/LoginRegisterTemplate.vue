@@ -17,7 +17,10 @@
         <div class="flex justify-center items-center md:h-screen">
           <div class="bg-white shadow-lg form flex-1 mx-4 md:mx-0 max-w-md p-8">
             <div v-if="showSignup">
-              <Signup @showLoginForm="showSignup = false"></Signup>
+              <Signup
+                @showLoginForm="showSignup = false"
+                @verifyEmail="test()"
+              ></Signup>
             </div>
             <div v-else>
               <Login @showSignupForm="showSignup = true"></Login>
@@ -40,8 +43,12 @@ export default {
   },
   setup() {
     let showSignup = ref(true);
+    let test = () => {
+      console.log("hit");
+    };
     return {
       showSignup,
+      test,
     };
   },
 };

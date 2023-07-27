@@ -72,12 +72,12 @@
 </template>
 
 <script>
-import { ref, watch } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
-export default {
-  emits: ["showLoginForm"],
-  setup() {
+export default defineComponent({
+  emits: ["showLoginForm", "verifyEmail"],
+  setup(_, { emit }) {
     let router = new useRouter();
     let passwordMismatch = ref(false);
     let error = ref("");
@@ -111,6 +111,9 @@ export default {
           username: username.value,
           password: password.value,
         });
+        if (response.status == 201) {
+          verifyEmailTemplate();
+        }
       } catch (error) {
         const errorMessage = error.response.data.message;
         const errorStatus = error.response.status;
@@ -119,6 +122,11 @@ export default {
           params: { errorMessage, errorStatus },
         });
       }
+    };
+
+    //foremailverify emit
+    let verifyEmailTemplate = () => {
+      emit("verifyEmail");
     };
 
     return {
@@ -131,7 +139,7 @@ export default {
       error,
     };
   },
-};
+});
 </script>
 
 <style></style>
