@@ -33,7 +33,11 @@
 
   <!-- verifyTemplate -->
   <div v-else>
-    <TemplatewithMessage :message="VerifyTemplateMessage" theme="green" />
+    <TemplatewithMessage
+      :message="VerifyTemplateMessage"
+      theme="green"
+      @hideVerifyTemplate="showVerifyTemplate = false"
+    />
   </div>
 </template>
 

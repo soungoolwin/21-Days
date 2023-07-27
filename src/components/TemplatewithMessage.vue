@@ -11,7 +11,10 @@
       </h1>
       <p>
         If you verified your email, go back to
-        <router-link to="/">Login</router-link> page.
+        <button class="text-blue-500" @click="$emit('hideVerifyTemplate')">
+          Login
+        </button>
+        page.
       </p>
     </div>
   </div>
