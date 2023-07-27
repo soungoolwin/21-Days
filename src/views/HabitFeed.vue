@@ -1,5 +1,7 @@
 <template>
-  <div v-if="!habits"><TemplatewithMessage message="No Habit Yet!!" /></div>
+  <div v-if="!habits">
+    <TemplatewithMessage message="No Habit Yet!!" theme="red" />
+  </div>
   <div class="contentcard" v-for="habit in habits" :key="habit._id">
     <div class="flex justify-between">
       <div>

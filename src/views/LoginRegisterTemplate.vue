@@ -1,5 +1,5 @@
 <template>
-  <div class="SignupLogin mx-auto">
+  <div class="SignupLogin mx-auto" v-if="!showVerifyTemplate">
     <div class="grid grid-cols-1 md:grid-cols-2">
       <div class="left">
         <div class="Logo">
@@ -19,7 +19,7 @@
             <div v-if="showSignup">
               <Signup
                 @showLoginForm="showSignup = false"
-                @verifyEmail="test()"
+                @verifyEmail="test"
               ></Signup>
             </div>
             <div v-else>
@@ -30,25 +30,37 @@
       </div>
     </div>
   </div>
+
+  <!-- verifyTemplate -->
+  <div v-else>
+    <TemplatewithMessage :message="VerifyTemplateMessage" theme="green" />
+  </div>
 </template>
 
 <script>
+import TemplatewithMessage from "../components/TemplatewithMessage";
 import { ref } from "vue";
 import Login from "./Login";
 import Signup from "./Signup";
 export default {
   components: {
+    TemplatewithMessage,
     Login,
     Signup,
   },
   setup() {
     let showSignup = ref(true);
-    let test = () => {
-      console.log("hit");
+    let showVerifyTemplate = ref(false);
+    let VerifyTemplateMessage = ref("");
+    let test = (data) => {
+      VerifyTemplateMessage.value = data;
+      showVerifyTemplate.value = true;
     };
     return {
       showSignup,
       test,
+      showVerifyTemplate,
+      VerifyTemplateMessage,
     };
   },
 };

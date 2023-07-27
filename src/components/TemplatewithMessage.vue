@@ -1,7 +1,18 @@
 <template>
   <div class="errorContainer">
     <div class="errorCard">
-      <h1 class="text-red-500">{{ message }}</h1>
+      <h1
+        :class="{
+          'text-green-500': theme == 'green',
+          'text-red-500': theme == 'red',
+        }"
+      >
+        {{ message }}
+      </h1>
+      <p>
+        If you verified your email, go back to
+        <router-link to="/">Login</router-link> page.
+      </p>
     </div>
   </div>
 </template>
@@ -9,11 +20,12 @@
 <script>
 import { ref } from "vue";
 export default {
-  props: ["message"],
+  props: ["message", "theme"],
   setup(props) {
     let message = ref(props.message);
+    let theme = ref(props.theme);
 
-    return { message };
+    return { message, theme };
   },
 };
 </script>

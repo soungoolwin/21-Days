@@ -126,7 +126,7 @@ export default defineComponent({
 
     //foremailverify emit
     let verifyEmailTemplate = () => {
-      emit("verifyEmail");
+      emit("verifyEmail", "Check your Email inbox and verify your Email!");
     };
 
     return {

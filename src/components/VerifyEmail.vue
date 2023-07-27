@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <h1>Verify Email</h1>
-    <p>Verifying your email, please wait...</p>
+  <div class="errorContainer">
+    <div class="errorCard" v-if="beforeVerify">
+      <h1>Verifying your email. Please Wait.....</h1>
+    </div>
+    <div class="errorCard" v-if="!beforeVerify">
+      <h1>Your Email is verified. Go back to your browser.</h1>
+    </div>
   </div>
 </template>
 
@@ -9,6 +13,11 @@
 import axios from "axios";
 export default {
   name: "VerifyEmail",
+  data() {
+    return {
+      beforeVerify: true,
+    };
+  },
   async created() {
     try {
       const token = this.$route.query.token;
@@ -28,7 +37,7 @@ export default {
           verificationToken: token,
         });
         if (response.status == 200) {
-          this.$router.push("/");
+          this.beforeVerify = false;
         }
       } catch (error) {
         const errorMessage = error.response.data.message;
@@ -42,3 +51,27 @@ export default {
   },
 };
 </script>
+<style>
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Set the height of the container to the full viewport height */
+}
+
+.errorCard {
+  background-color: white;
+  width: 60%;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.errorCard h1 {
+  margin: 15px;
+  font-weight: bolder;
+}
+.statusCode {
+  color: red;
+  font-size: 40px;
+}
+</style>
