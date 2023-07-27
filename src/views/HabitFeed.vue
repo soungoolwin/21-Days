@@ -1,4 +1,5 @@
 <template>
+  <div v-if="!habits"><NoHabits /></div>
   <div class="contentcard" v-for="habit in habits" :key="habit._id">
     <div class="flex justify-between">
       <div>
@@ -25,13 +26,17 @@
 </template>
 
 <script>
+import NoHabits from "../components/NoHabits";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { onMounted, ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 export default {
   props: ["currentUser"],
-  components: { LoadingSpinner },
+  components: {
+    NoHabits,
+    LoadingSpinner,
+  },
   setup() {
     let router = useRouter();
     let smallScreen = ref(false);
