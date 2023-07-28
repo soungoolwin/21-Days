@@ -9,7 +9,7 @@
       >
         {{ message }}
       </h1>
-      <p>
+      <p v-if="isVerifyTemplate">
         If you verified your email, go back to
         <button class="text-blue-500" @click="$emit('hideVerifyTemplate')">
           Login
@@ -21,14 +21,15 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 export default {
   props: ["message", "theme"],
   setup(props) {
     let message = ref(props.message);
     let theme = ref(props.theme);
+    let isVerifyTemplate = ref(false);
 
-    return { message, theme };
+    return { message, theme, isVerifyTemplate };
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!habits">
+  <div v-if="habits.length === 0">
     <TemplatewithMessage message="No Habit Yet!!" theme="red" />
   </div>
   <div class="contentcard" v-for="habit in habits" :key="habit._id">
