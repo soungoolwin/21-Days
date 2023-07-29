@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
+import { onMounted, onUpdated, ref } from "vue";
 export default {
   props: ["message", "theme"],
   setup(props) {
@@ -29,6 +29,11 @@ export default {
     let theme = ref(props.theme);
     let isVerifyTemplate = ref(false);
 
+    onMounted(() => {
+      if (props.message == "Check your Email inbox and verify your Email!") {
+        isVerifyTemplate.value = true;
+      }
+    });
     return { message, theme, isVerifyTemplate };
   },
 };
