@@ -51,13 +51,11 @@ export default {
       loading.value = true;
       currentPage.value++;
       await getHabits(currentPage.value);
-      loading.value = false;
     };
     let prevPage = async () => {
       loading.value = true;
       currentPage.value--;
       await getHabits(currentPage.value);
-      loading.value = false;
     };
     let getHabits = async (currentPage) => {
       try {
@@ -76,10 +74,7 @@ export default {
     };
 
     onMounted(() => {
-      if (habits.value.length === 0) {
-        console.log("hit");
-        getHabits(currentPage.value);
-      }
+      getHabits(currentPage.value);
     });
 
     return {
