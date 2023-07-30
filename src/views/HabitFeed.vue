@@ -29,7 +29,7 @@
 
 <script>
 import TemplatewithMessage from "../components/TemplatewithMessage";
-import LoadingSpinner from "../components/LoadingSpinner";
+
 import { onMounted, ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
@@ -37,7 +37,6 @@ export default {
   props: ["currentUser"],
   components: {
     TemplatewithMessage,
-    LoadingSpinner,
   },
   setup() {
     let router = useRouter();
@@ -77,7 +76,10 @@ export default {
     };
 
     onMounted(() => {
-      getHabits(currentPage.value);
+      if (habits.value.length === 0) {
+        console.log("hit");
+        getHabits(currentPage.value);
+      }
     });
 
     return {

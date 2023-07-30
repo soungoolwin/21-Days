@@ -92,6 +92,9 @@
         <div v-if="isProfileEditRoute">
           <ProfileEdit @profileUpdated="updateSideNav"></ProfileEdit>
         </div>
+        <div v-else-if="isHabitFeedRoute">
+          <HabitFeed></HabitFeed>
+        </div>
         <div v-else>
           <router-view></router-view>
         </div>
@@ -148,12 +151,17 @@ export default defineComponent({
       return route.path === "/profile/edit";
     });
 
+    const isHabitFeedRoute = computed(() => {
+      return route.path === "/habit-feed";
+    });
+
     return {
       smallScreen,
       logout,
       currentUser,
       updateSideNav,
       isProfileEditRoute,
+      isHabitFeedRoute,
     };
   },
 });
